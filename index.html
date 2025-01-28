@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message App</title>
+</head>
+<body>
+    <h1>Send a Message</h1>
+    <form id="messageForm">
+        <textarea id="messageInput" placeholder="Enter your message" required></textarea>
+        <button type="submit">Send</button>
+    </form>
+
+    <h2>Messages</h2>
+    <div id="messagesContainer"></div>
+
+    <script>
+        const apiUrl = 'http://localhost:3001/messageboard';
+
+        // Fetch and display messages
+        async function fetchMessages() {
+            try {
+                const response = await fetch(apiUrl);
+                const messages = await response.json();
+                const container = document.getElementById('messagesContainer');
+                container.innerHTML = '';
+
+                if (messages.length > 0) {
+                    messages.forEach(({ message,created_at }) => {
+                        const messageElement = `<h3>${message}</h3><p>${created_at}</p>`;
+                        container.innerHTML += messageElement;
+                    });
+                } else {
+                    container.innerHTML = '<p>No messages found!</p>';
+                }
+            } catch (error) {
+                console.error('Error fetching messages:', error);
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('messageForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const message = document.getElementById('messageInput').value;
+
+            if (message.trim() === '') {
+                alert('Message cannot be empty!');
+                return;
+            }
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message }),
+                });
+
+                
+                if (response.ok) {
+                    alert('Message sent successfully!');
+                    document.getElementById('messageInput').value = '';
+                    fetchMessages();
+                } else {
+                    alert(result.error);
+                }
+            } catch (error) {
+                console.error('Error sending message:', error);
+            }
+        });
+
+        // Initial fetch of messages
+        fetchMessages();
+    </script>
+</body>
+</html>
