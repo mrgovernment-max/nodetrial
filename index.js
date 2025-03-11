@@ -12,15 +12,20 @@ app.use(bodyParser.json());
 
 // Azure SQL Database Configuration
 const dbConfig = {
-  user: "Emman", // Your Azure SQL admin username
-  password: "zun2uUiVhTZX@R6", // Your Azure SQL password
-  server: "mssgserver.database.windows.net", // Azure SQL Server
-  database: "msg_bd", // Your database name
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  server: process.env.DB_SERVER,
+  database: process.env.DB_NAME,
   options: {
-    encrypt: true, // Required for Azure SQL
+    encrypt: true,
     trustServerCertificate: false,
   },
 };
+
+// Root Route (Fixes "Cannot GET /" error)
+app.get("/", (req, res) => {
+  res.send("Welcome to the Message Board API! 🎉");
+});
 
 // Connect to Azure SQL Database
 sql
