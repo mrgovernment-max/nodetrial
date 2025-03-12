@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="This is Emman's E-commerce website.">
+    <meta name="author" content="Emman">
+    <title>Welcome to Emman's E-commerce</title>
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6790d7, #1f2d47); 
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #ffffff;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: rgba(239, 239, 239, 0.781); 
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        #img-profile{
+            width: 100%;
+            text-align: center;
+        }
+        
+        #img-profile img{
+            width: 40%;
+            border-radius: 50%;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        p {
+            color: #34495e;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            color: #2980b9; /* Highlight with a lighter shade of blue */
+            font-weight: 600;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 16px;
+            color: #7f8c8d;
+        }
+
+        .footer a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+   
+
+<div class="container">
+     <section id="img-profile">
+        <img src="logo.webp" alt="Logo">
+    </section>
+    <h1>Welcome to Emman's E-commerce Project</h1>
+    <p><span class="highlight">Please hold on,</span> He is gonna redirect You in <span style="color: red;" id="time"></span> seconds...</p>
+
+    <div class="footer">
+        <p>Cant wait? <a href="https://www.example.com">Go now.</a></p>
+    </div>
+</div>
+
+<script>
+    let count = 10;
+    
+    function countTime() {
+        const time = document.getElementById('time');
+        count = count - 1;
+        time.innerHTML = count;
+    }
+
+    function deleteCount() {
+        const time = document.getElementById('time');
+        time.style.display = 'none';
+      // window.location.href = 'https://emmanstrg.z13.web.core.windows.net/index.html'
+    }
+
+    setInterval(countTime, 1000);
+    setTimeout(deleteCount, 10000);
+</script>
+
+</body>
+</html>
